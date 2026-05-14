@@ -2,100 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mickey Premium Exam Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mickey Premium Mock</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { --primary-blue: #1a2b4c; --success-green: #2ecc71; --error-red: #e74c3c; --accent-purple: #9b59b6; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; margin: 0; user-select: none; -webkit-user-select: none; }
-        
-        /* Error Screen */
-        #lock-screen { display: none; text-align: center; margin-top: 100px; padding: 20px; font-weight: bold; font-size: 1.2em; color: var(--error-red); }
-        
-        /* Main UI */
-        #app-content { display: none; }
-        .header { background: var(--primary-blue); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid #f39c12; }
-        .timer-container { background: var(--error-red); padding: 5px 15px; border-radius: 4px; font-weight: bold; letter-spacing: 1px; }
-        .main-layout { display: flex; flex-wrap: wrap; padding: 15px; gap: 15px; }
-        
-        .question-section { flex: 1 1 60%; background: white; border-radius: 8px; padding: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); min-height: 350px; }
-        .palette-section { flex: 1 1 30%; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        
-        .palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 10px; margin-top: 15px; }
-        .q-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 0.9em; font-weight: bold; cursor: pointer; }
-        .answered { background: var(--success-green); color: white; border: none; }
-        .marked { background: var(--accent-purple); color: white; border: none; }
-        .unanswered { background: var(--error-red); color: white; border: none; }
-        
-        .footer { text-align: center; padding: 15px; margin-top: 20px; font-size: 0.85em; color: #7f8c8d; background: white; border-top: 1px solid #eee; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f8; margin: 0; user-select: none; }
+        .header { background: #1a2b4c; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .timer-box { font-weight: bold; background: #e74c3c; padding: 5px 15px; border-radius: 4px; }
+        .content { padding: 30px; text-align: center; background: white; margin: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .footer { position: fixed; bottom: 0; width: 100%; text-align: center; padding: 15px; color: #7f8c8d; font-size: 0.9em; background: #fff; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="lock-screen">
-        🚫 ACCESS DENIED 🚫<br><br>
-        <span style="color: #333; font-size: 0.9em;">Please open this test inside Mickey's Official Telegram Bot.</span>
+    <div id="loading" style="text-align: center; margin-top: 100px;">
+        <h2 style="color: #1a2b4c;">⏳ Starting Secure Exam Engine...</h2>
+        <p>Please wait, verifying Telegram credentials...</p>
     </div>
 
-    <div id="app-content">
+    <div id="main-ui" style="display: none;">
         <div class="header">
-            <div>Professional Exam Interface | Mock Test</div>
-            <div class="timer-container">⏱️ 45:00</div>
+            <div>Mickey's Pro Interface</div>
+            <div class="timer-box">⏱️ 20:00</div>
         </div>
-
-        <div class="main-layout">
-            <div class="question-section">
-                <h3 style="color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px;">Question 1</h3>
-                <p style="font-size: 1.1em; color: #333;" id="welcome-text">Loading encrypted question data...</p>
-                
-                <div style="margin-top: 25px;">
-                    <label><input type="radio" name="opt"> Option A</label><br><br>
-                    <label><input type="radio" name="opt"> Option B</label><br><br>
-                    <label><input type="radio" name="opt"> Option C</label><br><br>
-                    <label><input type="radio" name="opt"> Option D</label>
-                </div>
-            </div>
-
-            <div class="palette-section">
-                <h4 style="margin-top: 0; color: var(--primary-blue);">Question Palette</h4>
-                <div class="palette-grid">
-                    <div class="q-circle answered">1</div>
-                    <div class="q-circle unanswered">2</div>
-                    <div class="q-circle marked">3</div>
-                    <div class="q-circle">4</div>
-                    <div class="q-circle">5</div>
-                </div>
-            </div>
+        
+        <div class="content">
+            <h3 id="user-greeting" style="color: #2c3e50;">Welcome VIP User!</h3>
+            <p style="font-size: 1.1em;">Tumhara test PC par successfully load ho gaya hai bina kisi crash ke.</p>
+            <hr style="border: 1px solid #eee; margin: 20px 0;">
+            <p><b>Q1. Who is the best developer?</b></p>
+            <input type="radio" name="q"> A) Mickey<br><br>
+            <input type="radio" name="q"> B) @PureSoul222<br>
         </div>
 
         <div class="footer">
-            Secure Platform © Designed by <b>@PureSoul222</b> | Pro Scorecard System Active
+            Secure Platform © Designed by Mickey | Pro Scorecard System Active
         </div>
     </div>
 
     <script>
-        // PC par crash rokne ke liye DOMContentLoaded use kiya hai
-        document.addEventListener("DOMContentLoaded", function() {
-            const tg = window.Telegram.WebApp;
-            
-            tg.ready(); // CRITICAL: Tells Telegram that WebApp is ready to be displayed
-            tg.expand(); // Full screen
+        // ANTI-CRASH LOGIC: Window poori load hone ka wait karega
+        window.onload = function() {
+            try {
+                const tg = window.Telegram.WebApp;
+                tg.ready(); // Signal Telegram that we are ready
+                
+                // 1 Second ka delay diya hai taaki PC ka graphics engine crash na ho
+                setTimeout(() => {
+                    tg.expand(); // Screen badi karo
+                    
+                    // Loading hatao aur Main UI dikhao
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('main-ui').style.display = 'block';
 
-            // Block Copy/Paste Shortcuts
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'u' || e.key === 'p' || e.key === 's')) { e.preventDefault(); }
-            });
+                    // User ka naam print karo
+                    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                        document.getElementById('user-greeting').innerText = "Hello " + tg.initDataUnsafe.user.first_name + "!";
+                    }
+                }, 800); // 800 milliseconds wait
 
-            // Verification Logic
-            if (!tg.initDataUnsafe || !tg.initDataUnsafe.user) {
-                // Not in Telegram
-                document.getElementById('lock-screen').style.display = 'block';
-            } else {
-                // In Telegram
-                document.getElementById('app-content').style.display = 'block';
-                const user = tg.initDataUnsafe.user;
-                document.getElementById('welcome-text').innerHTML = `Hello <b>${user.first_name}</b>, tumhara RRB PO Level Test ready hai. All the best!`;
+            } catch (err) {
+                console.error("Initialization Error", err);
             }
+        };
+
+        // Keyboard Copy Paste Block
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 's')) { e.preventDefault(); }
         });
     </script>
 </body>
