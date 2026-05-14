@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mickey Premium Portal</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* Oliveboard Premium UI Styling */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f8; margin: 0; user-select: none; -webkit-user-select: none; }
+        .header { background: #1a2b4c; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .timer-box { font-weight: bold; background: #e74c3c; padding: 5px 15px; border-radius: 4px; }
+        .main-container { display: flex; padding: 20px; gap: 20px; }
+        .question-area { flex: 3; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); min-height: 400px; }
+        .palette-area { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .status-btn { display: inline-block; width: 35px; height: 35px; border-radius: 50%; text-align: center; line-height: 35px; margin: 5px; color: white; cursor: pointer; }
+        .answered { background: #2ecc71; } .unanswered { background: #e74c3c; } .marked { background: #9b59b6; }
+        .footer-credits { text-align: center; padding: 15px; color: #7f8c8d; font-size: 0.9em; margin-top: 20px; }
+        #auth-error { display: none; color: #e74c3c; text-align: center; margin-top: 50px; font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body oncontextmenu="return false;"> <div id="auth-error">
+        🚫 ACCESS DENIED 🚫<br><br>Please open this test inside Mickey's Official Telegram Bot.
+    </div>
+
+    <div id="exam-ui" style="display: none;">
+        <div class="header">
+            <div>Mickey's Premium Mock Test</div>
+            <div class="timer-box">⏱️ 20:00</div>
+        </div>
+        
+        <div class="main-container">
+            <div class="question-area" id="q-box">
+                <h3 style="color: #34495e;">Loading Secure Content...</h3>
+                <p>Authenticating your Telegram ID securely...</p>
+            </div>
+            
+            <div class="palette-area">
+                <h4 style="margin-top: 0;">Question Palette</h4>
+                <div class="status-btn answered">1</div>
+                <div class="status-btn unanswered">2</div>
+                <div class="status-btn marked">3</div>
+                <div class="status-btn answered">4</div>
+            </div>
+        </div>
+
+        <div class="footer-credits">
+            Secure Platform © Designed by Mickey | Pro Scorecard System Active
+        </div>
+    </div>
+
+    <script>
+        // Copy-Paste & Keyboard Shortcuts Block
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'u' || e.key === 'p' || e.key === 's')) { e.preventDefault(); }
+        });
+
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Full screen inside Telegram
+
+        // Telegram Auth Verification
+        if (!tg.initDataUnsafe || !tg.initDataUnsafe.user) {
+            // Browser se khola gaya hai -> Block it
+            document.getElementById('auth-error').style.display = 'block';
+        } else {
+            // Telegram ke andar khola gaya hai -> Show UI
+            document.getElementById('exam-ui').style.display = 'block';
+            const user = tg.initDataUnsafe.user;
+            
+            // Yahan par actual data bot/backend se aayega
+            setTimeout(() => {
+                document.getElementById('q-box').innerHTML = `
+                    <h3 style="color: #34495e;">Q1. Secure Question loaded for ${user.first_name} (ID: ${user.id})</h3>
+                    <p>What is the capital of France?</p>
+                    <input type="radio" name="q1"> A) Berlin<br><br>
+                    <input type="radio" name="q1"> B) Paris<br><br>
+                    <input type="radio" name="q1"> C) Rome<br><br>
+                `;
+            }, 1500); // 1.5 seconds loading effect
+        }
+    </script>
+</body>
+</html>
